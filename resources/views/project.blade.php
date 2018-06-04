@@ -56,83 +56,109 @@
             <a href="#" class="am-text-ir">CUCIPM</a>
         </h1>
 
-        <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#doc-topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+        <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only"
+                data-am-collapse="{target: '#doc-topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span
+                    class="am-icon-bars"></span></button>
 
         <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
             <ul class="am-nav am-nav-pills am-topbar-nav">
-                <li class="am-active"><a href="#">首页</a></li>
-                <li><a href="#">项目</a></li>
+                <li><a href="#">首页</a></li>
+                <li class="am-active"><a href="#">项目</a></li>
                 <li><a href="#">申请</a></li>
             </ul>
 
             <div class="am-topbar-right">
-                <button class="am-btn am-btn-secondary am-topbar-btn am-btn-sm"><span class="am-icon-pencil"></span> 注册</button>
+                <button class="am-btn am-btn-secondary am-topbar-btn am-btn-sm"><span class="am-icon-pencil"></span> 注册
+                </button>
             </div>
 
             <div class="am-topbar-right">
-                <button class="am-btn am-btn-primary am-topbar-btn am-btn-sm"><span class="am-icon-user"></span> 登录</button>
+                <button class="am-btn am-btn-primary am-topbar-btn am-btn-sm"><span class="am-icon-user"></span> 登录
+                </button>
             </div>
         </div>
     </div>
 </header>
-<div class="screen">
-    <div class="am-g">
-        <div class="am-u-lg-12">
-            <h1 class="screen-title">CUC大学生创新项目</h1>
-            <p>期待你的参与，打造CUCIPM</p>
-            <p><a class="am-btn am-btn-sm screen-btn" href="#">查看更多项目</a></p>
-        </div>
-    </div>
-</div>
-<div class="project">
-    <div class="am-g am-container">
-        <div class="am-lg-12">
-           <h2 class="project-h2">技术、理论、艺术，CUCIPM 需要你的每项才能！</h2>
-            <div class="am-g">
-                <div class="am-u-lg-3 am-u-md-6 am-u-sm-12 project-detail">
-                    <div class="am-thumbnail">
-                        <img src="{{asset('img/project.jpg')}}" alt="栗子志愿">
-                        <div class="am-thumbnail-caption">
-                            <h3 class="project-h3">栗子志愿</h3>
-                            <p>高考志愿填报网站</p>
-                            <p><a href="#" class="am-btn am-btn-primary">了解更多</a></p>
+<div class="am-container">
+    <div class="project">
+        <div class="am-g am-container">
+            <div class="am-lg-12">
+                <h2 class="project-h2">技术、理论、艺术，CUCIPM 需要你的每项才能！</h2>
+                <div class="am-g">
+                    <div class="am-u-lg-3 am-u-md-6 am-u-sm-12 project-detail">
+                        <div class="am-thumbnail">
+                            <img src="{{asset('img/project.jpg')}}" alt="栗子志愿">
+                            <div class="am-thumbnail-caption">
+                                <h3 class="project-h3">栗子志愿</h3>
+                                <p>高考志愿填报网站</p>
+                                <p><a href="#" class="am-btn am-btn-primary">了解更多</a></p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="am-u-lg-3 am-u-md-6 am-u-sm-12 project-detail">
-                    <div class="am-thumbnail">
-                        <img src="{{asset('img/project.jpg')}}" alt="栗子志愿">
-                        <div class="am-thumbnail-caption">
-                            <h3 class="project-h3">栗子志愿</h3>
-                            <p>高考志愿填报网站</p>
-                            <p><a href="#" class="am-btn am-btn-primary">了解更多</a></p>
+                    <div class="am-u-lg-3 am-u-md-6 am-u-sm-12 project-detail">
+                        <div class="am-thumbnail">
+                            <img src="{{asset('img/project.jpg')}}" alt="栗子志愿">
+                            <div class="am-thumbnail-caption">
+                                <h3 class="project-h3">栗子志愿</h3>
+                                <p>高考志愿填报网站</p>
+                                <p><a href="#" class="am-btn am-btn-primary">了解更多</a></p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="am-u-lg-3 am-u-md-6 am-u-sm-12 project-detail">
-                    <div class="am-thumbnail">
-                        <img src="{{asset('img/project.jpg')}}" alt="栗子志愿">
-                        <div class="am-thumbnail-caption">
-                            <h3 class="project-h3">栗子志愿</h3>
-                            <p>高考志愿填报网站</p>
-                            <p><a href="#" class="am-btn am-btn-primary">了解更多</a></p>
+                    <div class="am-u-lg-3 am-u-md-6 am-u-sm-12 project-detail">
+                        <div class="am-thumbnail">
+                            <img src="{{asset('img/project.jpg')}}" alt="栗子志愿">
+                            <div class="am-thumbnail-caption">
+                                <h3 class="project-h3">栗子志愿</h3>
+                                <p>高考志愿填报网站</p>
+                                <p><a href="#" class="am-btn am-btn-primary">了解更多</a></p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="am-u-lg-3 am-u-md-6 am-u-sm-12 project-detail">
-                    <div class="am-thumbnail">
-                        <img src="{{asset('img/project.jpg')}}" alt="栗子志愿">
-                        <div class="am-thumbnail-caption">
-                            <h3 class="project-h3">栗子志愿</h3>
-                            <p>高考志愿填报网站</p>
-                            <p><a href="#" class="am-btn am-btn-primary">了解更多</a></p>
+                    <div class="am-u-lg-3 am-u-md-6 am-u-sm-12 project-detail">
+                        <div class="am-thumbnail">
+                            <img src="{{asset('img/project.jpg')}}" alt="栗子志愿">
+                            <div class="am-thumbnail-caption">
+                                <h3 class="project-h3">栗子志愿</h3>
+                                <p>高考志愿填报网站</p>
+                                <p><a href="#" class="am-btn am-btn-primary">了解更多</a></p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <a href="#" class="project-more am-btn am-btn-primary am-center">更多CUCIPM项目</a>
         </div>
     </div>
+    <ul data-am-widget="pagination"
+        class="am-pagination am-pagination-select"
+    >
+
+
+        <li class="am-pagination-prev ">
+            <a href="#" class="">上一页</a>
+        </li>
+
+
+        <li class="am-pagination-select">
+            <select>
+                <option value="#" class="">1
+                    /
+                </option>
+                <option value="#" class="">2
+                    /
+                </option>
+                <option value="#" class="">3
+                    /
+                </option>
+            </select>
+        </li>
+
+
+        <li class="am-pagination-next ">
+            <a href="#" class="">下一页</a>
+        </li>
+
+    </ul>
 </div>
 <div class="about">
     <div class="am-g am-container">
@@ -162,7 +188,6 @@
         <img class="am-gotop" src="{{asset('assets/i/totop.gif')}}" style="width: 50px;height: 50px"/>
     </a>
 </div>
-
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="{{asset('assets/js/jquery.min.js')}}"></script>
 <!--<![endif]-->

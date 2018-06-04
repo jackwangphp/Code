@@ -7,7 +7,7 @@
     <meta name="keywords" content="">
     <meta name="viewport"
           content="width=device-width, initial-scale=1">
-    <title>Hello Amaze UI</title>
+    <title>CUCIPM</title>
 
     <!-- Set render engine for 360 browser -->
     <meta name="renderer" content="webkit">
@@ -31,38 +31,24 @@
 
     <link rel="stylesheet" href="{{asset('assets/css/amazeui.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/app.css')}}">
-
-    <style>
-        .login {
-            width: 40%;
-            position: fixed;
-            left: 30%;
-            top: 200px;
-            color: #fff;
-        }
-        .login input {
-            opacity: 0.5;
-        }
-    </style>
+    <link rel="stylesheet" href="{{asset('css/public.css')}}">
 </head>
 <body>
-<div class="login">
-    <form class="am-form" action="">
-        <h2>登录</h2>
-        <hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
-        <div class="am-form-group">
-            <label for="userid">账号</label>
-            <input type="text" id="userid" name="userid" placeholder="校园网账号">
-        </div>
-        <div class="am-form-group">
-            <label for="password">密码</label>
-            <input type="text" id="password" name="password" placeholder="密码">
-        </div>
-        <button type="submit" class="am-btn am-btn-default am-fr">登录</button>
-    </form>
-</div>
-<div id="container">
-    <div id="anitOut" class="anitOut" style="">
+<div class="login am-g">
+    <div class="am-u-lg-12">
+        <form class="am-form" action="">
+            <h2>登录</h2>
+            <hr data-am-widget="divider" style="" class="am-divider am-divider-default"/>
+            <div class="am-form-group">
+                <label for="userid">账号</label>
+                <input type="text" id="userid" name="userid" placeholder="校园网账号">
+            </div>
+            <div class="am-form-group">
+                <label for="password">密码</label>
+                <input type="text" id="password" name="password" placeholder="密码">
+            </div>
+            <button type="submit" class="am-btn am-btn-default" style="width: 100%">登录</button>
+        </form>
     </div>
 </div>
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -74,7 +60,5 @@
 <script src="{{asset('assets/js/amazeui.ie8polyfill.min.js')}}"></script>
 <![endif]-->
 <script src="{{asset('assets/js/amazeui.min.js')}}"></script>
-<script src="{{asset('js/cav.js')}}"></script>
-<script src="{{asset('js/getStart.js')}}"></script>
 </body>
 </html>

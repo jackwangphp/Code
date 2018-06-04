@@ -26,3 +26,15 @@ Route::get("/index", function (){
 Route::get("/login", function (){
     return view('login');
 });
+
+Route::get("/project", function (){
+    return view('project');
+});
+
+Route::get("/apply", function (){
+    return view('apply');
+});
+
+Route::get("/team", function (){
+    return view('team');
+});
