@@ -42,3 +42,5 @@ Route::get("/team", function (){
 Route::get("/p_detail", function (){
     return view('p_detail');
 });
+
+Route::get("/u_info/{id}", 'IndexController@getinfo');
