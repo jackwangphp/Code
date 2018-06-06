@@ -23,9 +23,7 @@ Route::get("/index", function (){
     return view('index');
 });
 
-Route::get("/login", function (){
-    return view('login');
-});
+Route::get("/login", 'Auth\LoginController@showLoginForm');
 
 Route::get("/project", function (){
     return view('project');
@@ -43,4 +41,4 @@ Route::get("/p_detail", function (){
     return view('p_detail');
 });
 
-Route::get("/u_info/{id}", 'IndexController@getinfo');
+Route::get('/u_info/{id}', 'IndexController@getinfo');

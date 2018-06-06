@@ -58,10 +58,14 @@
     background: #fff;
     border:1px solid #7f8c8d;
     border-bottom: 0px;
+    background-image: url("timg.gif");
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    background-position:top center;
 }
 
 .login input {
-    opacity: 0.5;
+    opacity: 1;
 }
 
 .apply {

@@ -14,10 +14,12 @@ class IndexController extends Controller
             'skey'=>'f255d83af93b3786ca280a978a8481e3d2ed6181',
             'userid'=>$id
         ];
-        $client = new Client();
+        $client = new Client([
+            'base_uri'=>'http://eteaching.cuc.edu.cn'
+        ]);
         $res= $client->request(
             'POST',
-            'http://eteaching.cuc.edu.cn/auth/getInfo',
+            '/auth/getInfo',
             ['json' => $body]
         );
 

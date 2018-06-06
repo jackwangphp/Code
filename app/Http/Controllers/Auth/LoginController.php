@@ -59,7 +59,14 @@ class LoginController extends Controller
         if ($this->attemptLogin($request)) {
             return $this->sendLoginResponse($request);
         }else{
+            $un_auth = ['userid' => $request->input('userid'),'password'=>$request->input('password')];
+            $is_cuc = json_decode($this->get_info_cuc('/auth/auth', 'POST', $un_auth));
+            if(is_cuc['code'] == '20'){
 
+            }else{
+
+            }
+            $this->get_info_cuc('/auth/getInfo', 'POST', $un_auth['userid']);
         }
 
         // If the login attempt was unsuccessful we will increment the number of attempts
@@ -69,4 +76,5 @@ class LoginController extends Controller
 
         return $this->sendFailedLoginResponse($request);
     }
+
 }

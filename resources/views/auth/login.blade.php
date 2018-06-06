@@ -32,11 +32,17 @@
     <link rel="stylesheet" href="{{asset('assets/css/amazeui.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/app.css')}}">
     <link rel="stylesheet" href="{{asset('css/public.css')}}">
+    <style>
+        body {
+            background-color:#dddddd;
+        }
+    </style>
 </head>
 <body>
 <div class="login am-g">
     <div class="am-u-lg-12">
-        <form class="am-form" action="">
+        <form class="am-form" method="post">
+            @csrf
             <h2>登录</h2>
             <hr data-am-widget="divider" style="" class="am-divider am-divider-default"/>
             <div class="am-form-group">
