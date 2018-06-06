@@ -38,3 +38,7 @@ Route::get("/apply", function (){
 Route::get("/team", function (){
     return view('team');
 });
+
+Route::get("/p_detail", function (){
+    return view('p_detail');
+});
