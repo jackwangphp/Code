@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use App\User;
 
 class LoginController extends Controller
 {
@@ -27,6 +28,11 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = '/index';
+    /**
+     * @var string
+     * return massage
+     */
+    public $msg = '';
 
     /**
      * Create a new controller instance.
@@ -60,13 +66,32 @@ class LoginController extends Controller
             return $this->sendLoginResponse($request);
         }else{
             $un_auth = ['userid' => $request->input('userid'),'password'=>$request->input('password')];
-            $is_cuc = json_decode($this->get_info_cuc('/auth/auth', 'POST', $un_auth));
-            if(is_cuc['code'] == '20'){
-
-            }else{
-
+            $is_cuc = json_decode($this->get_info_cuc('/auth/auth', 'POST', $un_auth), true);
+            if($is_cuc['code'] == '20'){
+                $info = $this->get_info_cuc('/auth/getInfo', 'POST', $un_auth);
+                $un_auth['info'] = json_decode($info, true)['info'];
+                //dump($un_auth['info']);die();
+                if($request->has('email'))
+                {
+                    $this->validate($request,[
+                        'userid'=>'required|string',
+                        'password'=>'required|string',
+                        'email'=>'required|string|email'
+                    ]);
+                    $un_auth['name'] = $un_auth['info']['name'];
+                    $un_auth['type'] = $is_cuc['role'];//1.学生 2.教师 3.管理员
+                    $un_auth['email'] = $request->input('email');
+                    $un_auth['info'] = (string)$info;
+                    $res = User::create($un_auth);
+                    if($res){
+                        return $this->sendLoginResponse($request);
+                    }else{
+                        $this->msg = '用户创建失败';
+                    }
+                }else{
+                    return view('auth.register',$un_auth);
+                }
             }
-            $this->get_info_cuc('/auth/getInfo', 'POST', $un_auth['userid']);
         }
 
         // If the login attempt was unsuccessful we will increment the number of attempts
@@ -74,7 +99,16 @@ class LoginController extends Controller
         // user surpasses their maximum number of attempts they will get locked out.
         $this->incrementLoginAttempts($request);
 
+        $this->msg = '参数错误';
         return $this->sendFailedLoginResponse($request);
+    }
+
+    public function sendFailedLoginResponse(Request $request)
+    {
+        return view('auth.login',[
+            'userid' => $request->input('userid'),
+            'msg' => $this->msg
+        ]);
     }
 
 }

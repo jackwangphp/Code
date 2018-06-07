@@ -41,19 +41,18 @@
 <body>
 <div class="login am-g">
     <div class="am-u-lg-12">
-        <form class="am-form" method="post">
+        <form class="am-form" method="post" action="{{url('login')}}">
             @csrf
-            <h2>登录</h2>
+            <h2>Hi，{{ $info['name'] }}</h2>
             <hr data-am-widget="divider" style="" class="am-divider am-divider-default"/>
+            <p>首次使用需要绑定邮箱</p>
+            <input type="text" id="userid" name="userid" value="{{ $userid }}" style="display:none;">
+            <input type="text" id="password" name="password" value="{{ $password }}" style="display: none">
             <div class="am-form-group">
-                <label for="userid">账号</label>
-                <input type="text" id="userid" name="userid" value="" placeholder="校园网账号" required>
+                <label for="email">邮箱</label>
+                <input type="email" id="email" name="email" placeholder="绑定邮箱" required>
             </div>
-            <div class="am-form-group">
-                <label for="password">密码</label>
-                <input type="text" id="password" name="password" placeholder="密码" required>
-            </div>
-            <button type="submit" class="am-btn am-btn-default" style="width: 100%">登录</button>
+            <button type="submit" class="am-btn am-btn-default" style="width: 100%">绑定</button>
         </form>
     </div>
 </div>

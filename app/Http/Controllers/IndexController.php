@@ -22,7 +22,6 @@ class IndexController extends Controller
             '/auth/getInfo',
             ['json' => $body]
         );
-
         return response($res->getBody(),200);
 
     }
