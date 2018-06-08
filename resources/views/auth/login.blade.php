@@ -51,7 +51,7 @@
             </div>
             <div class="am-form-group">
                 <label for="password">密码</label>
-                <input type="text" id="password" name="password" placeholder="密码" required>
+                <input type="password" id="password" name="password" placeholder="密码" required>
             </div>
             <button type="submit" class="am-btn am-btn-default" style="width: 100%">登录</button>
         </form>

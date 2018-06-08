@@ -11,21 +11,21 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get("/vue", function () {
     return view('vue');
 });
 
-Route::get("/index", function (){
+Route::get("/", function (){
     return view('index');
 });
 
 Route::get("/login", 'Auth\LoginController@showLoginForm')->name('login');
 
 Route::post("/login", 'Auth\LoginController@login');
+
+Route::get("/logout", 'Auth\LoginController@logout')->name('logout');
+
+Route::get("/user", 'UserController@userHome')->middleware('auth')->name('user');
 
 Route::get("/project", function (){
     return view('project');

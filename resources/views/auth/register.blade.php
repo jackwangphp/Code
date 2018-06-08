@@ -47,7 +47,7 @@
             <hr data-am-widget="divider" style="" class="am-divider am-divider-default"/>
             <p>首次使用需要绑定邮箱</p>
             <input type="text" id="userid" name="userid" value="{{ $userid }}" style="display:none;">
-            <input type="text" id="password" name="password" value="{{ $password }}" style="display: none">
+            <input type="password" id="password" name="password" value="{{ $password }}" style="display: none">
             <div class="am-form-group">
                 <label for="email">邮箱</label>
                 <input type="email" id="email" name="email" placeholder="绑定邮箱" required>

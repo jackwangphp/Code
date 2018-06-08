@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\User;
 
 class LoginController extends Controller
@@ -27,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/index';
+    protected $redirectTo = '/';
     /**
      * @var string
      * return massage
@@ -78,19 +79,24 @@ class LoginController extends Controller
                         'password'=>'required|string',
                         'email'=>'required|string|email'
                     ]);
-                    $un_auth['name'] = $un_auth['info']['name'];
-                    $un_auth['type'] = $is_cuc['role'];//1.学生 2.教师 3.管理员
-                    $un_auth['email'] = $request->input('email');
-                    $un_auth['info'] = (string)$info;
-                    $res = User::create($un_auth);
-                    if($res){
-                        return $this->sendLoginResponse($request);
-                    }else{
-                        $this->msg = '用户创建失败';
-                    }
                 }else{
                     return view('auth.register',$un_auth);
                 }
+                $un_auth['name'] = $un_auth['info']['name'];
+                $un_auth['password'] = Hash::make($un_auth['password']);
+                $un_auth['type'] = $is_cuc['role'];//1.学生 2.教师 3.管理员
+                $un_auth['email'] = $request->input('email');
+                $un_auth['info'] = json_encode($un_auth['info'],JSON_UNESCAPED_UNICODE);
+                $res = User::updateOrCreate($un_auth);
+                if($res){
+                    if($this->attemptLogin($request))
+                        return $this->sendLoginResponse($request);
+                    $this->msg = '验证失败';
+                }else{
+                    $this->msg = '用户创建失败';
+                }
+            }else{
+                $this->msg = $is_cuc['msg'];
             }
         }
 
