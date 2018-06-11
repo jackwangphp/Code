@@ -86,6 +86,7 @@ class LoginController extends Controller
                 $un_auth['password'] = Hash::make($un_auth['password']);
                 $un_auth['type'] = $is_cuc['role'];//1.学生 2.教师 3.管理员
                 $un_auth['email'] = $request->input('email');
+                $un_auth['cellphone'] = $request->input('cellphone');
                 $un_auth['info'] = json_encode($un_auth['info'],JSON_UNESCAPED_UNICODE);
                 $res = User::updateOrCreate($un_auth);
                 if($res){
