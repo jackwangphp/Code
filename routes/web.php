@@ -35,13 +35,16 @@ Route::get("/apply", function (){
     return view('apply');
 });
 
-Route::get("/team", function (){
-    return view('team');
-});
+Route::get("/team", 'TeamController@index')->middleware('auth');
+
+Route::post("/team", 'TeamController@create')->middleware('auth');
+
+
 
 Route::get("/p_detail", function (){
     return view('p_detail');
 });
 
 Route::get('/u_info/{id}', 'IndexController@getinfo');
+Route::get('/mail', 'IndexController@mailTest');
 

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\JoinTeam;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Mail;
 
 class IndexController extends Controller
 {
@@ -24,5 +26,11 @@ class IndexController extends Controller
         );
         return response($res->getBody(),200);
 
+    }
+
+    public function mailTest(Request $request){
+        $mail = new JoinTeam($request->user());
+        Mail::to($request->user())->send($mail);
+        return $mail;
     }
 }

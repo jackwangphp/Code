@@ -33,7 +33,7 @@ class LoginController extends Controller
      * @var string
      * return massage
      */
-    public $msg = '';
+    public $msg = '未知错误';
 
     /**
      * Create a new controller instance.
@@ -67,10 +67,10 @@ class LoginController extends Controller
             return $this->sendLoginResponse($request);
         }else{
             $un_auth = ['userid' => $request->input('userid'),'password'=>$request->input('password')];
-            $is_cuc = json_decode($this->get_info_cuc('/auth/auth', 'POST', $un_auth), true);
+            $is_cuc = $this->get_info_cuc('/auth/auth', 'POST', $un_auth);
             if($is_cuc['code'] == '20'){
                 $info = $this->get_info_cuc('/auth/getInfo', 'POST', $un_auth);
-                $un_auth['info'] = json_decode($info, true)['info'];
+                $un_auth['info'] = $info['info'];
                 //dump($un_auth['info']);die();
                 if($request->has('email'))
                 {
@@ -105,8 +105,6 @@ class LoginController extends Controller
         // to login and redirect the user back to the login form. Of course, when this
         // user surpasses their maximum number of attempts they will get locked out.
         $this->incrementLoginAttempts($request);
-
-        $this->msg = '参数错误';
         return $this->sendFailedLoginResponse($request);
     }
 
