@@ -2,26 +2,28 @@
 
 namespace App\Mail;
 
+use App\Team;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use App\User;
 
-class JoinTeam extends Mailable
+class JoinTeamMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $user;
+    public $user,$sender;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct(Team $user, User $sender)
     {
         $this->user = $user;
+        $this->sender = $sender;
     }
 
     /**
@@ -31,6 +33,6 @@ class JoinTeam extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.hello');
+        return $this->view('emails.join');
     }
 }

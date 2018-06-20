@@ -3,6 +3,16 @@
 @section('body')
 <div class="team am-container">
     <div class="am-scrollable-horizontal">
+        @if ($errors->any())
+            <div class="am-alert am-alert-danger" data-am-alert>
+                <button type="button" class="am-close">&times;</button>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <form method="post">
             @csrf
             <table class="am-table am-table-bordered am-table-radius am-table-striped">
@@ -35,7 +45,7 @@
                 </tr>
                 <tr  style="display:none;">
                     <th>成员丁</th>
-                    <th><input type="text" name="userid_5"  style="display:none;"></th>
+                    <th><input type="text" name="userid_6"  style="display:none;"></th>
                 </tr>
                 </tbody>
             </table>

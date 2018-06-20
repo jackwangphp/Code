@@ -15,7 +15,7 @@ class CreateTeamsTable extends Migration
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('teamid')->unique();//团队标识
+            $table->string('teamid');//团队标识
             $table->string('projectid');
             $table->year('year');
             $table->string('userid')->unique();
@@ -23,7 +23,7 @@ class CreateTeamsTable extends Migration
             $table->string('email')->unique();
             $table->string('inteam');//1.负责人，2.普通成员，3.指导老师
             $table->json('info');
-            $table->string('type');
+            $table->string('type');//1.国家级，2.北京市级
             $table->string('cellphone')->default('');
             $table->timestamps();
         });

@@ -37,8 +37,7 @@ Route::get("/apply", function (){
 
 Route::get("/team", 'TeamController@index')->middleware('auth');
 
-Route::post("/team", 'TeamController@create')->middleware('auth');
-
+Route::post("/team", 'TeamController@create')->middleware('auth')->name('team');
 
 
 Route::get("/p_detail", function (){
@@ -47,4 +46,6 @@ Route::get("/p_detail", function (){
 
 Route::get('/u_info/{id}', 'IndexController@getinfo');
 Route::get('/mail', 'IndexController@mailTest');
+
+Route::get('/test','IndexController@test');
 

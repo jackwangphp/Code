@@ -42,17 +42,30 @@
 <div class="login am-g">
     <div class="am-u-lg-12">
         <form class="am-form" method="post">
-            @csrf
             <h2>登录</h2>
+            @if ($errors->any())
+                @foreach ($errors->all() as $error)
+                    <div class="am-alert am-alert-danger" data-am-alert>
+                    {{ $error }}
+                    </div>
+                @endforeach
+            @endif
+            @if(isset($msg))
+            <div class="am-alert am-alert-danger" data-am-alert>
+                <button type="button" class="am-close">&times;</button>
+                {{ $msg }}
+            </div>
+            @endif
             <hr data-am-widget="divider" style="" class="am-divider am-divider-default"/>
             <div class="am-form-group">
                 <label for="userid">账号</label>
-                <input type="text" id="userid" name="userid" value="" placeholder="校园网账号" required>
+                <input type="text" id="userid" name="userid" value="{{ $userid or '' }}" placeholder="校园网账号" required>
             </div>
             <div class="am-form-group">
                 <label for="password">密码</label>
                 <input type="password" id="password" name="password" placeholder="密码" required>
             </div>
+            @csrf
             <button type="submit" class="am-btn am-btn-default" style="width: 100%">登录</button>
         </form>
     </div>

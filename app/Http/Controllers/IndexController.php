@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\JoinTeam;
+use App\Mail\JoinTeamMail;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Handler\CurlHandler;
 use Illuminate\Support\Facades\Mail;
 
 class IndexController extends Controller
@@ -29,8 +31,12 @@ class IndexController extends Controller
     }
 
     public function mailTest(Request $request){
-        $mail = new JoinTeam($request->user());
+        $mail = new JoinTeamMail($request->user());
         Mail::to($request->user())->send($mail);
         return $mail;
+    }
+
+    public function test(){
+        return response(md5(uniqid()));
     }
 }

@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->json('info');
-            $table->string('type');
+            $table->string('type');//1为学生；2为教师；3为管理员
             $table->string('cellphone')->default('');
             $table->rememberToken();
             $table->timestamps();
