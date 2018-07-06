@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\User;
 
 class LoginController extends Controller
 {
@@ -65,39 +65,38 @@ class LoginController extends Controller
 
         if ($this->attemptLogin($request)) {
             return $this->sendLoginResponse($request);
-        }else{
-            $un_auth = ['userid' => $request->input('userid'),'password'=>$request->input('password')];
+        } else {
+            $un_auth = ['userid' => $request->input('userid'), 'password' => $request->input('password')];
             $is_cuc = $this->get_info_cuc('/auth/auth', 'POST', $un_auth);
-            if($is_cuc['code'] == '20'){
+            if ($is_cuc['code'] == '20') {
                 $info = $this->get_info_cuc('/auth/getInfo', 'POST', $un_auth);
                 $un_auth['info'] = $info['info'];
                 //dump($un_auth['info']);die();
-                if($request->has('email'))
-                {
-                    $this->validate($request,[
-                        'userid'=>'required|string',
-                        'password'=>'required|string',
-                        'email'=>'required|string|email'
+                if ($request->has('email')) {
+                    $this->validate($request, [
+                        'userid' => 'required|string',
+                        'password' => 'required|string',
+                        'email' => 'required|string|email'
                     ]);
-                }else{
-                    return view('auth.register',$un_auth);
+                    $un_auth['email'] = $request->input('email');
+                    $un_auth['cellphone'] = $request->input('cellphone');
+                } else {
+                    return view('auth.register', $un_auth);
                 }
                 $un_auth['name'] = $un_auth['info']['name'];
                 $un_auth['password'] = Hash::make($un_auth['password']);
                 $un_auth['type'] = $is_cuc['role'];//1.学生 2.教师 3.管理员
-                $un_auth['email'] = $request->input('email');
-                $un_auth['cellphone'] = $request->input('cellphone');
-                $un_auth['info'] = json_encode($un_auth['info'],JSON_UNESCAPED_UNICODE);
+                $un_auth['info'] = json_encode($un_auth['info'], JSON_UNESCAPED_UNICODE);
                 $res = User::updateOrCreate($un_auth);
-                if($res){
-                    if($this->attemptLogin($request))
+                if ($res) {
+                    if ($this->attemptLogin($request))
                         return $this->sendLoginResponse($request);
                     $this->msg = '验证失败';
-                }else{
+                } else {
                     $this->msg = '用户创建失败';
                 }
-            }else{
-                $this->msg = $is_cuc['msg'];
+            } else {
+                $this->msg = '账号密码错误';
             }
         }
 
@@ -110,7 +109,7 @@ class LoginController extends Controller
 
     public function sendFailedLoginResponse(Request $request)
     {
-        return view('auth.login',[
+        return view('auth.login', [
             'userid' => $request->input('userid'),
             'msg' => $this->msg
         ]);

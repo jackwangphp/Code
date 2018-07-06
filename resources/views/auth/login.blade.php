@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="{{asset('css/public.css')}}">
     <style>
         body {
-            background-color:#dddddd;
+            background-color: #dddddd;
         }
     </style>
 </head>
@@ -46,15 +46,15 @@
             @if ($errors->any())
                 @foreach ($errors->all() as $error)
                     <div class="am-alert am-alert-danger" data-am-alert>
-                    {{ $error }}
+                        {{ $error }}
                     </div>
                 @endforeach
             @endif
             @if(isset($msg))
-            <div class="am-alert am-alert-danger" data-am-alert>
-                <button type="button" class="am-close">&times;</button>
-                {{ $msg }}
-            </div>
+                <div class="am-alert am-alert-danger" data-am-alert>
+                    <button type="button" class="am-close">&times;</button>
+                    {{ $msg }}
+                </div>
             @endif
             <hr data-am-widget="divider" style="" class="am-divider am-divider-default"/>
             <div class="am-form-group">
