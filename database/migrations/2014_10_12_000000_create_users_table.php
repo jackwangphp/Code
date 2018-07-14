@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->json('info');
             $table->string('type');//1为学生；2为教师；3为管理员
             $table->string('cellphone')->default('');
+            $table->string('team')->default('');
             $table->rememberToken();
             $table->timestamps();
         });

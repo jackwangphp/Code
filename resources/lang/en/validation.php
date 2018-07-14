@@ -125,8 +125,40 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'userid_1' => [
+            'require' => '项目负责人不能为空',
+            'exists' => '未知用户，提醒他先登陆一次系统',
+            'max' => '学号/公号不得超过:max位',
+            'alpha_num' => '学号/公号只能由数字字母组成',
+            'different' => '请勿重复填写',
+        ],
+        'userid_2' => [
+            'require' => '指导老师不能为空',
+            'exists' => '未知用户，提醒他先登陆一次系统',
+            'max' => '学号/公号不得超过:max位',
+            'alpha_num' => '学号/公号只能由数字字母组成',
+            'different' => '请勿重复填写',
+        ],
+        'userid_3' => [
+            'require' => '成员甲不能为空',
+            'exists' => '未知用户，提醒他先登陆一次系统',
+            'max' => '学号/公号不得超过:max位',
+            'alpha_num' => '学号/公号只能由数字字母组成',
+            'different' => '请勿重复填写',
+        ],
+        'userid_4' => [
+            'require' => '成员乙不能为空',
+            'exists' => '未知用户，提醒他先登陆一次系统',
+            'max' => '学号/公号不得超过:max位',
+            'alpha_num' => '学号/公号只能由数字字母组成',
+            'different' => '请勿重复填写',
+        ],
+        'userid_5' => [
+            'require' => '成员丙不能为空',
+            'exists' => '未知用户，提醒他先登陆一次系统',
+            'max' => '学号/公号不得超过:max位',
+            'alpha_num' => '学号/公号只能由数字字母组成',
+            'different' => '请勿重复填写',
         ],
     ],
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreTeamCreate;
 use App\Jobs\JoinTeam;
 use App\User;
 use Illuminate\Http\Request;
@@ -12,26 +13,47 @@ class TeamController extends Controller
 
     private $leader;
     private $teamid;
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(Request $request){
         return view('team', $request->user());
     }
 
-    public function create(Request $request){
-        $team_data = $request->validate([
-            'userid_1' => 'required|exists:users,userid|max:12|alpha_num',
-            'userid_2' => 'required|exists:users,userid|max:12|alpha_num',
-            'userid_3' => 'required|exists:users,userid|max:12|alpha_num',
-            'userid_4' => 'required|exists:users,userid|max:12|alpha_num',
-            'userid_5' => 'required|exists:users,userid|max:12|alpha_num',
-        ]);
+    public function create(StoreTeamCreate $request){
+        $team_data = $request->all();
         $this->teamid = md5(uniqid());
+        //添加负责人
         $res[0] = $this->addTeam($team_data['userid_1'], '1');
+        //添加指导教师
         $res[1] = $this->addTeam($team_data['userid_2'], '3');
+        //添加成员
         $res[2] = $this->addTeam($team_data['userid_3'], '2');
         $res[3] = $this->addTeam($team_data['userid_4'], '2');
         $res[4] = $this->addTeam($team_data['userid_5'], '2');
 
         return $res;
+    }
+
+    public function confirm($token, $y){
+        $team = Team::where('token',$token)->first();
+        if(is_null($team)){
+            return redirect('/');
+        }
+        if($y == '1'){
+            $team->is_active = 1;
+            $team->token = str_random(40);
+            $team->save();
+            return redirect('user');
+        }else{
+            $team->delete();
+            return redirect('/');
+        }
+
+
     }
 
     /**
@@ -44,22 +66,22 @@ class TeamController extends Controller
     private function addTeam($userid, $inteam){
         $user = User::where('userid',$userid)->first();
 
-        $existed = Team::where([
-            ['userid','=',$userid],
-            ['year','=',date('Y')],
-            ['inteam','<>','3']
-        ])->exists();
-        if($existed){
-            return [
-                false, $userid, $user['name'].'已经加入了其他团队'
-            ];
-        }
-
-        if($inteam == '3' && $user['type'] == '1'){
-            return [
-                false, $userid, $user['name'].'不是教师'
-            ];
-        }
+//        $existed = Team::where([
+//            ['userid','=',$userid],
+//            ['year','=',date('Y')],
+//            ['inteam','<>','3']
+//        ])->exists();
+//        if($existed){
+//            return [
+//                false, $userid, $user['name'].'已经加入了其他团队'
+//            ];
+//        }
+//
+//        if($inteam == '3' && $user['type'] == '1'){
+//            return [
+//                false, $userid, $user['name'].'不是教师'
+//            ];
+//        }
 
         if($inteam == '1'){
             $this->leader = $user;
@@ -74,7 +96,9 @@ class TeamController extends Controller
             'inteam'=>$inteam,
             'info'=>$user['info'],
             'cellphone'=>$user['cellphone'],
-            'type'=>''
+            'type'=>'',
+            'is_active'=>'',
+            'token'=>str_random(40)
         ];
         $team = Team::create($team);
         JoinTeam::dispatch($team, $this->leader)->onQueue('JoinTeam');

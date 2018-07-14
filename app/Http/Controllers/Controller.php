@@ -19,7 +19,7 @@ class Controller extends BaseController
         $body["appId"] = 'KEPaT6';
         $body["skey"]= 'f255d83af93b3786ca280a978a8481e3d2ed6181';
         $client = new Client([
-            'base_uri' => 'http://eteaching.cuc.edu.cn',
+            'base_uri' => 'http://bishe.cuc.edu.cn',
             'timeout'  => 3.0,
         ]);
         try{

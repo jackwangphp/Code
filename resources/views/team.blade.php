@@ -3,16 +3,6 @@
 @section('body')
 <div class="team am-container">
     <div class="am-scrollable-horizontal">
-        @if ($errors->any())
-            <div class="am-alert am-alert-danger" data-am-alert>
-                <button type="button" class="am-close">&times;</button>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
         <form method="post">
             @csrf
             <table class="am-table am-table-bordered am-table-radius am-table-striped">
@@ -25,23 +15,48 @@
                 <tbody>
                 <tr>
                     <th>项目负责人</th>
-                    <th><input type="text" name="userid_1" value="{{ $userid }}" placeholder="学号" required></th>
+                    <th>
+                        <input type="text" name="userid_1" value="{{ old('userid_1') }}" placeholder="学号" required>
+                        @if($errors->has('userid_1'))
+                            <small>*{{ $errors->first('userid_1') }}</small>
+                        @endif
+                    </th>
                 </tr>
                 <tr>
                     <th>指导老师</th>
-                    <th><input type="text" name="userid_2" placeholder="导师工号" required></th>
+                    <th>
+                        <input type="text" name="userid_2" value="{{ old('userid_2') }}" placeholder="导师工号" required>
+                        @if($errors->has('userid_2'))
+                            <small>*{{ $errors->first('userid_2') }}</small>
+                        @endif
+                    </th>
                 </tr>
                 <tr>
                     <th>成员甲</th>
-                    <th><input type="text" name="userid_3" placeholder="学号" required></th>
+                    <th>
+                        <input type="text" name="userid_3" value="{{ old('userid_3') }}" placeholder="学号" required>
+                        @if($errors->has('userid_3'))
+                            <small>*{{ $errors->first('userid_3') }}</small>
+                        @endif
+                    </th>
                 </tr>
                 <tr>
                     <th>成员乙</th>
-                    <th><input type="text" name="userid_4" placeholder="学号" required></th>
+                    <th>
+                        <input type="text" name="userid_4" value="{{ old('userid_4') }}" placeholder="学号" required>
+                        @if($errors->has('userid_4'))
+                            <small>*{{ $errors->first('userid_4') }}</small>
+                        @endif
+                    </th>
                 </tr>
                 <tr>
                     <th>成员丙</th>
-                    <th><input type="text" name="userid_5" placeholder="学号" required></th>
+                    <th>
+                        <input type="text" name="userid_5" value="{{ old('userid_5') }}" placeholder="学号" required>
+                        @if($errors->has('userid_5'))
+                            <small>*{{ $errors->first('userid_5') }}</small>
+                        @endif
+                    </th>
                 </tr>
                 <tr  style="display:none;">
                     <th>成员丁</th>

@@ -32,6 +32,9 @@
     <link rel="stylesheet" href="{{asset('assets/css/amazeui.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/app.css')}}">
     <link rel="stylesheet" href="{{asset('css/public.css')}}">
+    @section('css_js')
+        {{--js,css--}}
+    @show
     <style>
         .am-topbar .am-text-ir {
             display: block;
@@ -128,5 +131,8 @@
 <script src="{{asset('assets/js/amazeui.ie8polyfill.min.js')}}"></script>
 <![endif]-->
 <script src="{{asset('assets/js/amazeui.min.js')}}"></script>
+@section('script')
+    {{--   scripts    --}}
+@show
 </body>
 </html>

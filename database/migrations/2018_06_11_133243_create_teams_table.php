@@ -25,6 +25,8 @@ class CreateTeamsTable extends Migration
             $table->json('info');
             $table->string('type');//1.国家级，2.北京市级
             $table->string('cellphone')->default('');
+            $table->string('is_active')->default('');
+            $table->string('token')->default('');
             $table->timestamps();
         });
     }

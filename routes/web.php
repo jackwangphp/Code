@@ -7,40 +7,42 @@
 |
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| contains the 'web' middleware group. Now create something great!
 |
 */
 
-Route::get("/vue", function () {
+Route::get('/vue', function () {
     return view('vue');
 });
 
-Route::get("/", function (){
+Route::get('/', function (){
     return view('index');
 });
 
-Route::get("/login", 'Auth\LoginController@showLoginForm')->name('login');
+Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
 
-Route::post("/login", 'Auth\LoginController@login');
+Route::post('/login', 'Auth\LoginController@login');
 
-Route::get("/logout", 'Auth\LoginController@logout')->name('logout');
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::get("/user", 'UserController@userHome')->middleware('auth')->name('user');
+Route::get('/user', 'UserController@userHome')->middleware('auth')->name('user');
 
-Route::get("/project", function (){
+Route::get('/project', function (){
     return view('project');
 });
 
-Route::get("/apply", function (){
+Route::get('/apply', function (){
     return view('apply');
 });
 
-Route::get("/team", 'TeamController@index')->middleware('auth');
+Route::get('/team', 'TeamController@index');
+Route::post('/team', 'TeamController@create')->name('team');
+Route::get('/confirm/{token}-{y}', 'TeamController@confirm')->name('confirm');
 
-Route::post("/team", 'TeamController@create')->middleware('auth')->name('team');
+Route::resource('applications','ApplicationController');
 
 
-Route::get("/p_detail", function (){
+Route::get('/p_detail', function (){
     return view('p_detail');
 });
 

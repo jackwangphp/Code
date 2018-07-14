@@ -150,7 +150,7 @@ return [
         /*
          * Package Service Providers...
          */
-        //Laracasts\Flash\FlashServiceProvider::class,
+        Overtrue\LaravelUEditor\UEditorServiceProvider::class,
         /*
          * Application Service Providers...
          */

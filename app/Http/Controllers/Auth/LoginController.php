@@ -76,7 +76,8 @@ class LoginController extends Controller
                     $this->validate($request, [
                         'userid' => 'required|string',
                         'password' => 'required|string',
-                        'email' => 'required|string|email'
+                        'cellphone' => 'required|string',
+                        'email' => 'required|string|email|unique:users,email'
                     ]);
                     $un_auth['email'] = $request->input('email');
                     $un_auth['cellphone'] = $request->input('cellphone');
