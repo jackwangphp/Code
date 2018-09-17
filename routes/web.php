@@ -15,6 +15,10 @@ Route::get('/vue', function () {
     return view('vue');
 });
 
+Route::get('/music', function () {
+    return view('dataview.musicview');
+});
+
 Route::get('/', function (){
     return view('index');
 });

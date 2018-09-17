@@ -6,21 +6,25 @@
     <style>
         .btn_success {
             display: inline-block;
-            margin-top: 15px;
-            margin-bottom: 10px;
+            margin-bottom: 0;
+            padding: .5em 1em;
             vertical-align: middle;
-            color: rgb(255, 255, 255);
-            background-color: rgb(31, 168, 113);
+            font-size: 1.6rem;
+            font-weight: 400;
+            line-height: 1.2;
             text-align: center;
+            background-color: rgb(20, 168, 114);
         }
         .btn_error {
             display: inline-block;
-            margin-top: 15px;
-            margin-bottom: 10px;
+            margin-bottom: 0;
+            padding: .5em 1em;
             vertical-align: middle;
-            color: rgb(255, 255, 255);
-            background-color: rgb(233, 104, 107);
+            font-size: 1.6rem;
+            font-weight: 400;
+            line-height: 1.2;
             text-align: center;
+            background-color: rgb(233, 104, 107);
         }
     </style>
 </head>
@@ -30,10 +34,10 @@
     你的同学--{{ $sender->name }}---邀请你加入大创团队
 </p>
 <p class="btn_success">
-    <a target="_blank" href="{{ route('confirm') }}/{{ $user->token }}-1">加入</a>
+    <a target="_blank" href="{{ route('confirm',[$user->token, 1]) }}">加入</a>
 </p>
 <p class="btn_error">
-    <a target="_blank" href="{{ route('confirm') }}/{{ $user->token }}-0">拒绝</a>
+    <a target="_blank" href="{{ route('confirm',[$user->token, 1]) }}">拒绝</a>
 </p>
 </body>
 </html>

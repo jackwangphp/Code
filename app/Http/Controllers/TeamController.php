@@ -29,11 +29,11 @@ class TeamController extends Controller
         //添加负责人
         $res[0] = $this->addTeam($team_data['userid_1'], '1');
         //添加指导教师
-        $res[1] = $this->addTeam($team_data['userid_2'], '3');
+        $res[1] = $this->addTeam($team_data['userid_2'], '2');
         //添加成员
-        $res[2] = $this->addTeam($team_data['userid_3'], '2');
-        $res[3] = $this->addTeam($team_data['userid_4'], '2');
-        $res[4] = $this->addTeam($team_data['userid_5'], '2');
+        $res[2] = $this->addTeam($team_data['userid_3'], '3');
+        $res[3] = $this->addTeam($team_data['userid_4'], '3');
+        $res[4] = $this->addTeam($team_data['userid_5'], '3');
 
         return $res;
     }
@@ -66,23 +66,6 @@ class TeamController extends Controller
     private function addTeam($userid, $inteam){
         $user = User::where('userid',$userid)->first();
 
-//        $existed = Team::where([
-//            ['userid','=',$userid],
-//            ['year','=',date('Y')],
-//            ['inteam','<>','3']
-//        ])->exists();
-//        if($existed){
-//            return [
-//                false, $userid, $user['name'].'已经加入了其他团队'
-//            ];
-//        }
-//
-//        if($inteam == '3' && $user['type'] == '1'){
-//            return [
-//                false, $userid, $user['name'].'不是教师'
-//            ];
-//        }
-
         if($inteam == '1'){
             $this->leader = $user;
         }
@@ -101,6 +84,8 @@ class TeamController extends Controller
             'token'=>str_random(40)
         ];
         $team = Team::create($team);
+        $user->team = $user->team.'-'.$this->teamid;
+        $user->save();
         JoinTeam::dispatch($team, $this->leader)->onQueue('JoinTeam');
         return [true, $userid, '已向'.$user['name'].'发送了邀请'];
     }

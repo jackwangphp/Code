@@ -5,6 +5,16 @@
 @endsection
 @section('body')
     <div class="am-container application">
+        @if ($errors->any())
+            <div class="am-alert am-alert-danger" data-am-alert>
+                <button type="button" class="am-close">&times;</button>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <form action="/applications" class="am-form" method="post">
             @csrf
             <div class="am-panel-group" id="accordion">
@@ -19,22 +29,25 @@
                             <table class="am-table am-table-striped am-table-hover">
                                 <tr>
                                     <td width="20%;"><lable>项目名称：</lable></td>
-                                    <td><input type="text" name="name"></td>
+                                    <td><input type="text" name="name" value="@if(isset($application['name'])){{ $application['name'] }}@endif" required></td>
                                 </tr>
                                 <tr>
                                     <td><lable>项目负责人：</lable></td>
-                                    <td><input type="text" name="leader"></tr></td>
+                                    {{--<td><input type="text" name="leader"></td>--}}
+                                    <td>{{ $teams[0]['name'] }}</td>
+                                </tr>
                                 <tr>
                                     <td><lable>学院年级专业：</lable></td>
-                                    <td><input type="text" name="major"></td>
+                                    {{--<td><input type="text" name="major"></td>--}}
+                                    <td>{{ $teams[0]['college'] }}- @if(isset($teams[0]['grade'])){{ $teams[0]['grade'] }}@endif -{{ $teams[0]['major'] }}</td>
                                 </tr>
                                 <tr>
                                     <td><lable>联系电话：</lable></td>
-                                    <td><input type="text" name="leader_phone"></td>
+                                    <td>{{ $teams[0]['cellphone'] }}</td>
                                 </tr>
                                 <tr>
                                     <td><lable>电子邮件：</lable></td>
-                                    <td><input type="text" name="leader_email"></td>
+                                    <td>{{ $teams[0]['email'] }}</td>
                                 </tr>
                             </table>
                         </div>
@@ -61,51 +74,29 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($teams as $team)
+                                    @if(isset($team['title']))
                                 <tr>
-                                    <td>MLXG</td>
-                                    <td>2015</td>
-                                    <td>计算机</td>
-                                    <td>计科</td>
-                                    <td>10086</td>
-                                    <td>123@qq.com</td>
-                                    <td>项目负责人</td>
+                                    <td>{{ $team['name'] }}</td>
+                                    <td></td>
+                                    <td>{{ $team['college'] }}</td>
+                                    <td>{{ $team['major'] }}</td>
+                                    <td>{{ $team['cellphone'] }}</td>
+                                    <td>{{ $team['email'] }}</td>
+                                    <td>{{ $team['inteam'] }} <small>{{ $team['title'] }}</small></td>
                                 </tr>
+                                    @else
                                 <tr>
-                                    <td>UZI</td>
-                                    <td>2015</td>
-                                    <td>计算机</td>
-                                    <td>计科</td>
-                                    <td>10086</td>
-                                    <td>123@qq.com</td>
-                                    <td>导师</td>
+                                    <td>{{ $team['name'] }}</td>
+                                    <td>{{ $team['grade'] }}</td>
+                                    <td>{{ $team['college'] }}</td>
+                                    <td>{{ $team['major'] }}</td>
+                                    <td>{{ $team['cellphone'] }}</td>
+                                    <td>{{ $team['email'] }}</td>
+                                    <td>{{ $team['inteam'] }}</td>
                                 </tr>
-                                <tr>
-                                    <td>ZITAI</td>
-                                    <td>2015</td>
-                                    <td>计算机</td>
-                                    <td>计科</td>
-                                    <td>10086</td>
-                                    <td>123@qq.com</td>
-                                    <td>项目成员</td>
-                                </tr>
-                                <tr>
-                                    <td>XIAOHU</td>
-                                    <td>2015</td>
-                                    <td>计算机</td>
-                                    <td>计科</td>
-                                    <td>10086</td>
-                                    <td>123@qq.com</td>
-                                    <td>项目成员</td>
-                                </tr>
-                                <tr>
-                                    <td>MING</td>
-                                    <td>2015</td>
-                                    <td>计算机</td>
-                                    <td>计科</td>
-                                    <td>10086</td>
-                                    <td>123@qq.com</td>
-                                    <td>项目成员</td>
-                                </tr>
+                                    @endif
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -118,7 +109,9 @@
                     </div>
                     <div id="do-not-say-3" class="am-panel-collapse am-collapse">
                         <div class="am-panel-bd">
-                            <div id="reason" name="reason"></div>
+                            <script id="reason" name="reason" type="text/plain">
+                                @if(isset($application['reason'])){!! $application['reason'] !!}@endif
+                            </script>
                         </div>
                     </div>
                 </div>
@@ -129,7 +122,9 @@
                     </div>
                     <div id="do-not-say-4" class="am-panel-collapse am-collapse">
                         <div class="am-panel-bd">
-                            <div id="plan" name="plan"></div>
+                            <script id="plan" name="plan" type="text/plain">
+                                @if(isset($application['plan'])){!! $application['plan'] !!}@endif
+                            </script>
                         </div>
                     </div>
                 </div>
@@ -140,7 +135,9 @@
                     </div>
                     <div id="do-not-say-5" class="am-panel-collapse am-collapse">
                         <div class="am-panel-bd">
-                            <div id="result" name="result"></div>
+                            <script id="result" name="result" type="text/plain">
+                                @if(isset($application['result'])){!! $application['result'] !!}@endif
+                            </script>
                         </div>
                     </div>
                 </div>
@@ -151,7 +148,9 @@
                     </div>
                     <div id="do-not-say-6" class="am-panel-collapse am-collapse">
                         <div class="am-panel-bd">
-                            <div id="outlay" name="outlay"></div>
+                            <script id="outlay" name="outlay">
+                                @if(isset($application['outlay_detail'])){!! $application['outlay_detail'] !!}@endif
+                            </script>
                         </div>
                     </div>
                 </div>
@@ -164,19 +163,31 @@
 @section('script')
     <!-- 实例化编辑器 -->
     <script type="text/javascript">
-        var plan = UE.getEditor('plan');
+        var config = {
+            toolbars: [
+                ['bold', 'italic', 'underline', 'strikethrough',
+                    'blockquote', 'insertunorderedlist', 'insertorderedlist','simpleupload','fullscreen'],
+            ],
+            elementPathEnabled: false,
+            enableContextMenu:false,
+            autoClearEmptyNode:true,
+            wordCount:false,
+            imagePopup:false,
+            autotypeset:{ indent: true, imageBlockLine: 'center'}
+        };
+        var plan = UE.getEditor('plan', config);
         plan.ready(function() {
             plan.execCommand('serverparam', '_token', '{{ csrf_token() }}'); // 设置 CSRF token.
         });
-        var reason = UE.getEditor('reason');
+        var reason = UE.getEditor('reason', config);
         reason.ready(function() {
             reason.execCommand('serverparam', '_token', '{{ csrf_token() }}'); // 设置 CSRF token.
         });
-        var result = UE.getEditor('result');
+        var result = UE.getEditor('result', config);
         result.ready(function() {
             result.execCommand('serverparam', '_token', '{{ csrf_token() }}'); // 设置 CSRF token.
         });
-        var outlay = UE.getEditor('outlay');
+        var outlay = UE.getEditor('outlay', config);
         outlay.ready(function() {
             outlay.execCommand('serverparam', '_token', '{{ csrf_token() }}'); // 设置 CSRF token.
         });

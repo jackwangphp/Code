@@ -21,7 +21,7 @@ class CreateTeamsTable extends Migration
             $table->string('userid')->unique();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('inteam');//1.负责人，2.普通成员，3.指导老师
+            $table->string('inteam');//1.负责人，2.指导老师，3.普通成员
             $table->json('info');
             $table->string('type');//1.国家级，2.北京市级
             $table->string('cellphone')->default('');
