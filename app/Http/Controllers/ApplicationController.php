@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Application;
 use App\Team;
 use Illuminate\Http\Request;
-use PhpOffice\PhpWord\PhpWord;
-use PhpOffice\PhpWord\IOFactory;
+use Illuminate\Support\Facades\Storage;
+
+//use PhpOffice\PhpWord\PhpWord;
+//use PhpOffice\PhpWord\IOFactory;
 
 class ApplicationController extends Controller
 {
@@ -45,24 +47,7 @@ class ApplicationController extends Controller
         ])->first();
 
         if (!is_null($leader)) {
-            $teams = Team::where([
-                ['teamid', '=', $leader->teamid],
-                ['is_active', '=', 1]
-            ])->orderBy('inteam')->get();
-            $teams = $teams->transform(function ($item) {
-                $data = json_decode($item->info, true);
-                $data['email'] = $item->email;
-                $data['cellphone'] = $item->cellphone;
-                $data['type'] = $item->type;
-                if ($item->inteam == 1) {
-                    $data['inteam'] = '项目负责人';
-                } elseif ($item->inteam == 2) {
-                    $data['inteam'] = '指导教师';
-                } else {
-                    $data['inteam'] = '项目成员';
-                }
-                return $data;
-            });
+            $teams = $this->getTeam($leader->teamid);
             return view('application', ['teams' => $teams, 'application' => $application]);
         } else {
             return view('warming.warming', ['warming' => '只有项目负责人才能创建或修改申请表，快去联系他吧！']);
@@ -84,7 +69,12 @@ class ApplicationController extends Controller
             'result' => 'required|string|min:25',
             'outlay' => 'required|string|min:25'
         ]);
-        $leader = $request->user();
+        $user = $request->user();
+        $leader = Team::where([
+            ['userid', '=', $user['userid']],
+            ['inteam', '=', 1],
+            ['year', '=', date('Y', time())]
+        ])->first();
         $exist = Application::where([
             ['year', date('Y', time())],
             ['leader_id', $leader['userid']]
@@ -105,8 +95,8 @@ class ApplicationController extends Controller
             $application['outlay'] = 1000;
             $application['begin_time'] = date('Y-m-d', time());
             $application['end_time'] = date('Y-m-d', time());
-            $application['team_id'] = $leader['team'];
-            $application['team_info'] = $leader['team'];
+            $application['team_id'] = $leader['teamid'];
+            $application['team_info'] = '';
 
             Application::create($application);
         }else{
@@ -132,11 +122,18 @@ class ApplicationController extends Controller
     {
 //        $pdf = PDF::loadView('pdf.application', $application);
 //        return $pdf->stream();
-        $word = new PhpWord();
-        $section = $word->addSection();
-        $section->addTextRun($application->reason);
-        $writer = IOFactory::createWriter($word, 'Word2007');
-        $writer->save('test.docx');
+//        $word = new PhpWord();
+//        $section = $word->addSection();
+//        $section->addText($application->plan);
+//        $writer = IOFactory::createWriter($word, 'Word2007');
+//        $writer->save('test.docx');
+        $teams = $this->getTeam($application['team_id']);
+        Storage::put('public/test.doc',view('word.application', [
+            'application'=>$application,
+            'teams'=>$teams
+            ]
+        ));
+        return $application;
     }
 
     /**
@@ -171,5 +168,28 @@ class ApplicationController extends Controller
     public function destroy($id)
     {
 
+    }
+
+
+    public function getTeam($teamid){
+        $teams = Team::where([
+            ['teamid', '=', $teamid],
+            ['is_active', '=', 1]
+        ])->orderBy('inteam')->get();
+        $teams = $teams->transform(function ($item) {
+            $data = json_decode($item->info, true);
+            $data['email'] = $item->email;
+            $data['cellphone'] = $item->cellphone;
+            $data['type'] = $item->type;
+            if ($item->inteam == 1) {
+                $data['inteam'] = '项目负责人';
+            } elseif ($item->inteam == 2) {
+                $data['inteam'] = '指导教师';
+            } else {
+                $data['inteam'] = '项目成员';
+            }
+            return $data;
+        });
+        return $teams;
     }
 }
