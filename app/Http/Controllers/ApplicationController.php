@@ -25,7 +25,8 @@ class ApplicationController extends Controller
      */
     public function index()
     {
-        //
+        $apps = Application::all();
+        return view('application.applist', ['apps'=> $apps]);
     }
 
     /**
@@ -48,7 +49,7 @@ class ApplicationController extends Controller
 
         if (!is_null($leader)) {
             $teams = $this->getTeam($leader->teamid);
-            return view('application', ['teams' => $teams, 'application' => $application]);
+            return view('application.create', ['teams' => $teams, 'application' => $application]);
         } else {
             return view('warming.warming', ['warming' => '只有项目负责人才能创建或修改申请表，快去联系他吧！']);
         }
@@ -128,12 +129,12 @@ class ApplicationController extends Controller
 //        $writer = IOFactory::createWriter($word, 'Word2007');
 //        $writer->save('test.docx');
         $teams = $this->getTeam($application['team_id']);
-        Storage::put('public/test.doc',view('word.application', [
-            'application'=>$application,
-            'teams'=>$teams
-            ]
-        ));
-        return $application;
+//        Storage::put('public/test.doc',view('word.application', [
+//            'application'=>$application,
+//            'teams'=>$teams
+//            ]
+//        ));
+        return view('application.appdetail', ['teams' => $teams, 'application' => $application]);
     }
 
     /**
@@ -142,9 +143,19 @@ class ApplicationController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Application $application)
     {
-        //
+        $teams = $this->getTeam($application['team_id']);
+//        $fileName = $application['year'].'中国传媒大学大学生创新项目申请表'.$application['name'].'-'.$application['leader'].'\.doc';
+//        $fileName = iconv('UTF-8', 'GB2312', $fileName);
+        $fileName = 'cucipm'.time().'.doc';
+        Storage::put('public/'.$fileName, view('word.application',
+            [
+                'application'=>$application,
+                'teams'=>$teams
+            ]
+        ));
+        return redirect(Storage::url('public/'.$fileName));
     }
 
     /**

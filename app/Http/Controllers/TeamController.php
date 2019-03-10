@@ -52,8 +52,6 @@ class TeamController extends Controller
             $team->delete();
             return redirect('/');
         }
-
-
     }
 
     /**
@@ -86,7 +84,7 @@ class TeamController extends Controller
         $team = Team::create($team);
         $user->team = $user->team.'-'.$this->teamid;
         $user->save();
-        JoinTeam::dispatch($team, $this->leader)->onQueue('JoinTeam');
+        //JoinTeam::dispatch($team, $this->leader)->onQueue('JoinTeam');
         return [true, $userid, '已向'.$user['name'].'发送了邀请'];
     }
 }

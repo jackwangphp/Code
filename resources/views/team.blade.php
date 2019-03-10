@@ -3,6 +3,7 @@
 @section('body')
 <div class="team am-container">
     <div class="am-scrollable-horizontal">
+
         <form method="post">
             @csrf
             <table class="am-table am-table-bordered am-table-radius am-table-striped">
