@@ -25,23 +25,23 @@
 
 .env
 + 数据库相关
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=homestead
-DB_USERNAME=homestead
-DB_PASSWORD=secret
+* DB_CONNECTION=mysql
+* DB_HOST=127.0.0.1
+* DB_PORT=3306
+* DB_DATABASE=homestead
+* DB_USERNAME=homestead
+* DB_PASSWORD=secret
 
 + 邮件相关
-MAIL_DRIVER=smtp
-MAIL_HOST=smtp.qq.com
-MAIL_PORT=25
-MAIL_USERNAME=email@qq.com
-MAIL_PASSWORD=****
-MAIL_ENCRYPTION=tls
+* MAIL_DRIVER=smtp
+* MAIL_HOST=smtp.qq.com
+* MAIL_PORT=25
+* MAIL_USERNAME=email@qq.com
+* MAIL_PASSWORD=****
+* MAIL_ENCRYPTION=tls
 
 #### 相关文档
-https://laravelacademy.org/laravel-docs-5_6
-http://laravel-admin.org/docs/zh
+* https://laravelacademy.org/laravel-docs-5_6
+* http://laravel-admin.org/docs/zh
 
 
