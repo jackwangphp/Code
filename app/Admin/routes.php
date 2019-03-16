@@ -14,4 +14,5 @@ Route::group([
     $router->resource('users', UserController::class);
     $router->resource('teams', TeamController::class);
     $router->resource('applications', ApplicationController::class);
+    $router->resource('projects', ProjectController::class);
 });

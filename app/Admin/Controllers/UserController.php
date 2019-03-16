@@ -23,8 +23,8 @@ class UserController extends Controller
     public function index(Content $content)
     {
         return $content
-            ->header('Index')
-            ->description('description')
+            ->header('用户')
+            ->description('注册用户')
             ->body($this->grid());
     }
 
@@ -85,12 +85,21 @@ class UserController extends Controller
         $grid->userid('Userid');
         $grid->name('Name');
         $grid->email('Email');
-        $grid->password('Password');
-        $grid->info('Info');
-        $grid->type('Type');
+        //$grid->password('Password');
+        //$grid->info('Info');
+        $grid->type('Type')->display(function ($type){
+            switch ($type) {
+                case 1:
+                    return '学生';
+                case 2:
+                    return '教师';
+                case 3:
+                    return '管理员';
+            }
+        });
         $grid->cellphone('Cellphone');
         $grid->team('Team');
-        $grid->remember_token('Remember token');
+        //$grid->remember_token('Remember token');
         $grid->created_at('Created at');
         $grid->updated_at('Updated at');
 

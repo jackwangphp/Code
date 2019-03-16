@@ -3,10 +3,10 @@
 @section('body')
 <div class="team am-container">
     <div class="am-scrollable-horizontal">
-
-        <form method="post">
+        @if(is_null($teams))
+            <form method="post">
             @csrf
-            <table class="am-table am-table-bordered am-table-radius am-table-striped">
+            <table class="am-table am-table-striped am-table-hover">
                 <thead>
                 <tr>
                     <th>成员类型</th>
@@ -66,8 +66,47 @@
                 </tbody>
             </table>
             <button type="submit" class="am-btn am-btn-default am-center" style="width: 40%">邀请</button>
-        </form>
+            </form>
+        @else
+            <table class="am-table am-table-bordered am-table-striped am-table-hover">
+                <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>年级</th>
+                    <th>学院</th>
+                    <th>专业</th>
+                    <th>手机</th>
+                    <th>E-mail</th>
+                    <th>类型</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($teams as $team)
+                    @if(isset($team['title']))
+                        <tr>
+                            <td>{{ $team['name'] }}</td>
+                            <td></td>
+                            <td>{{ $team['college'] }}</td>
+                            <td>{{ $team['major'] }}</td>
+                            <td>{{ $team['cellphone'] }}</td>
+                            <td>{{ $team['email'] }}</td>
+                            <td>{{ $team['inteam'] }} <small>{{ $team['title'] }}</small></td>
+                        </tr>
+                    @else
+                        <tr>
+                            <td>{{ $team['name'] }}</td>
+                            <td>{{ $team['grade'] }}</td>
+                            <td>{{ $team['college'] }}</td>
+                            <td>{{ $team['major'] }}</td>
+                            <td>{{ $team['cellphone'] }}</td>
+                            <td>{{ $team['email'] }}</td>
+                            <td>{{ $team['inteam'] }}</td>
+                        </tr>
+                    @endif
+                @endforeach
+                </tbody>
+            </table>
+        @endif
     </div>
 </div>
-<hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
 @endsection

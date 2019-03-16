@@ -20,7 +20,14 @@ class TeamController extends Controller
     }
 
     public function index(Request $request){
-        return view('team', $request->user());
+        $user = $request->user();
+        $isJoin = Team::where('userid',$user->userid)->first();
+        if(is_null($isJoin)){
+            $teams = [];
+        }else{
+            $teams = Team::getTeam($isJoin->teamid);
+        }
+        return view('team',['teams'=>$teams]);
     }
 
     public function create(StoreTeamCreate $request){
@@ -35,7 +42,7 @@ class TeamController extends Controller
         $res[3] = $this->addTeam($team_data['userid_4'], '3');
         $res[4] = $this->addTeam($team_data['userid_5'], '3');
 
-        return $res;
+        return redirect(route('team_info'));
     }
 
     public function confirm($token, $y){

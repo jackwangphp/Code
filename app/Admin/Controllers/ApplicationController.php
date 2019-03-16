@@ -23,8 +23,8 @@ class ApplicationController extends Controller
     public function index(Content $content)
     {
         return $content
-            ->header('Index')
-            ->description('description')
+            ->header('申请表')
+            ->description('申请表详情')
             ->body($this->grid());
     }
 
@@ -81,16 +81,18 @@ class ApplicationController extends Controller
     {
         $grid = new Grid(new Application);
 
-        $grid->id('Id');
+        $grid->id('预览')->display(function ($id){
+            return '<a href="'.route('applications.show',['application'=>$id]).'">查看详情<a>';
+        });
         $grid->type('Type');
         $grid->year('Year');
         $grid->name('Name');
-        $grid->leader_id('Leader id');
+        //$grid->leader_id('Leader id');
         $grid->leader('Leader');
-        $grid->grade('Grade');
-        $grid->major('Major');
-        $grid->college('College');
-        $grid->department('Department');
+        //$grid->grade('Grade');
+        //$grid->major('Major');
+        //$grid->college('College');
+        //$grid->department('Department');
         $grid->leader_phone('Leader phone');
         $grid->leader_email('Leader email');
         $grid->outlay('Outlay');
@@ -98,10 +100,10 @@ class ApplicationController extends Controller
         $grid->end_time('End time');
         $grid->team_id('Team id');
         $grid->team_info('Team info');
-        $grid->reason('Reason');
-        $grid->plan('Plan');
-        $grid->result('Result');
-        $grid->outlay_detail('Outlay detail');
+        //$grid->reason('Reason');
+        //$grid->plan('Plan');
+        //$grid->result('Result');
+        //$grid->outlay_detail('Outlay detail');
         $grid->proposal_t('Proposal t');
         $grid->proposal_d('Proposal d');
         $grid->proposal_u('Proposal u');

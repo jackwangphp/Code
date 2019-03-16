@@ -3,6 +3,11 @@
 @section('body')
     <div class="am-container app-detail">
         <div class="am-container application">
+            <ol class="am-breadcrumb am-breadcrumb-slash">
+                <li><a href="/" class="am-icon-home">首页</a></li>
+                <li><a href="{{route('applications.index')}}">申请列表</a></li>
+                <li class="am-active">{{$application['name']}}</li>
+            </ol>
             <div class="am-panel-group" id="accordion">
                 <div class="am-panel am-panel-default">
                     <div class="am-panel-hd">
@@ -146,6 +151,33 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="am-g am-container">
+                <div class="am-u-lg-4">
+                    <div class="am-panel am-panel-default">
+                        <div class="am-panel-hd">导师意见</div>
+                        <div class="am-panel-bd">
+                            {{$application['proposal_t']}}
+                        </div>
+                    </div>
+                </div>
+                <div class="am-u-lg-4">
+                    <div class="am-panel am-panel-default">
+                        <div class="am-panel-hd">学部意见</div>
+                        <div class="am-panel-bd">
+                            {{$application['proposal_d']}}
+                        </div>
+                    </div>
+                </div>
+                <div class="am-u-lg-4">
+                    <div class="am-panel am-panel-default">
+                        <div class="am-panel-hd">学院意见</div>
+                        <div class="am-panel-bd">
+                            {{$application['proposal_u']}}
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <button class="am-btn">
                 <i class="am-icon-cloud-download"></i>

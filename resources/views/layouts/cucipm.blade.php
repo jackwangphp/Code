@@ -63,9 +63,9 @@
 
         <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
             <ul class="am-nav am-nav-pills am-topbar-nav">
-                <li class="am-active"><a href="#">首页</a></li>
-                <li><a href="#">项目</a></li>
-                <li><a href="#">申请</a></li>
+                <li @if(url()->current() == url('/'))class="am-active"@endif ><a href="/">首页</a></li>
+                <li @if(url()->current() == url('/projects'))class="am-active"@endif><a href="{{route('projects.index')}}">项目</a></li>
+                <li @if(url()->current() == url('/applications'))class="am-active"@endif><a href="{{route('applications.index')}}">申请</a></li>
             </ul>
 
             @auth

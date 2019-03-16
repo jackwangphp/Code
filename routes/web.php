@@ -36,11 +36,12 @@ Route::get('/apply', function (){
     return view('apply');
 });
 
-Route::get('/team', 'TeamController@index');
+Route::get('/team', 'TeamController@index')->name('team_info');
 Route::post('/team', 'TeamController@create')->name('team');
 Route::get('/confirm/{token}-{y}', 'TeamController@confirm')->name('confirm');
 
 Route::resource('applications','ApplicationController');
+Route::resource('projects','ProjectController');
 
 
 Route::get('/p_detail', function (){

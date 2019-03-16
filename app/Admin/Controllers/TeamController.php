@@ -2,8 +2,8 @@
 
 namespace App\Admin\Controllers;
 
-use App\Team;
 use App\Http\Controllers\Controller;
+use App\Team;
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -22,9 +22,11 @@ class TeamController extends Controller
      */
     public function index(Content $content)
     {
+//        $content->header('大创团队');
+//        $content->description('负责人-指导教师-普通成员');
         return $content
-            ->header('Index')
-            ->description('description')
+            ->header('大创团队')
+            ->description('负责人-指导教师-普通成员')
             ->body($this->grid());
     }
 
@@ -88,7 +90,16 @@ class TeamController extends Controller
         $grid->userid('Userid');
         $grid->name('Name');
         $grid->email('Email');
-        $grid->inteam('Inteam');
+        $grid->inteam('Inteam')->display(function ($inteam) {
+            switch ($inteam) {
+                case 1:
+                    return '负责人';
+                case 2:
+                    return '指导教师';
+                case 3:
+                    return '团队成员';
+            }
+        });
         $grid->info('Info');
         $grid->type('Type');
         $grid->cellphone('Cellphone');

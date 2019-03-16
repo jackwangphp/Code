@@ -79,36 +79,7 @@
         </div>
     </div>
 </header>
-<div class="am-container">
-    <div class="apply am-g">
-        <div class="am-u-sm-3">
-            <a href="#">
-                <span class="am-icon-btn am-icon-btn-lg am-icon-user-plus am-center"></span>
-                <h3>创建团队</h3>
-            </a>
-        </div>
-        <div class="am-u-sm-3">
-            <a href="#">
-                <span class="am-icon-btn am-icon-btn-lg am-icon-diamond am-center"></span>
-                <h3>申请资格</h3>
-            </a>
 
-        </div>
-        <div class="am-u-sm-3">
-            <a href="#">
-                <span class="am-icon-btn am-icon-btn-lg am-icon-spinner am-icon-spin am-center"></span>
-                <h3>等待审批</h3>
-            </a>
-        </div>
-        <div class="am-u-sm-3">
-            <a href="#">
-                <span class="am-icon-btn am-icon-btn-lg am-icon-rocket am-center"></span>
-                <h3>项目进行</h3>
-            </a>
-        </div>
-        <hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
-    </div>
-</div>
 <div class="about">
     <div class="am-g am-container">
         <div class="sm-u-lg-12">
