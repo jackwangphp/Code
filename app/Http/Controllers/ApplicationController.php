@@ -145,7 +145,7 @@ class ApplicationController extends Controller
      */
     public function edit(Application $application)
     {
-        $teams = $this->getTeam($application['team_id']);
+        $teams = Team::getTeam($application['team_id']);
 //        $fileName = $application['year'].'中国传媒大学大学生创新项目申请表'.$application['name'].'-'.$application['leader'].'\.doc';
 //        $fileName = iconv('UTF-8', 'GB2312', $fileName);
         $fileName = 'cucipm'.time().'.doc';

@@ -163,7 +163,7 @@ class ApplicationController extends Controller
         $form = new Form(new Application);
 
         $form->text('type', 'Type');
-        $form->date('year', 'Year')->default(date('Y-m-d'));
+        $form->text('year', 'Year')->default(date('Y'));
         $form->text('name', 'Name');
         $form->text('leader_id', 'Leader id');
         $form->text('leader', 'Leader');
@@ -177,14 +177,14 @@ class ApplicationController extends Controller
         $form->date('begin_time', 'Begin time')->default(date('Y-m-d'));
         $form->date('end_time', 'End time')->default(date('Y-m-d'));
         $form->text('team_id', 'Team id');
-        $form->text('team_info', 'Team info');
+        $form->text('team_info', 'Team info')->default('{}');
         $form->textarea('reason', 'Reason');
         $form->textarea('plan', 'Plan');
         $form->textarea('result', 'Result');
         $form->textarea('outlay_detail', 'Outlay detail');
-        $form->text('proposal_t', 'Proposal t');
-        $form->text('proposal_d', 'Proposal d');
-        $form->text('proposal_u', 'Proposal u');
+        $form->text('proposal_t', 'Proposal t')->default('');
+        $form->text('proposal_d', 'Proposal d')->default('');
+        $form->text('proposal_u', 'Proposal u')->default('');
 
         return $form;
     }
