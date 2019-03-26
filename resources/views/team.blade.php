@@ -3,7 +3,7 @@
 @section('body')
 <div class="team am-container">
     <div class="am-scrollable-horizontal">
-        @if(is_null($teams))
+        @if(empty($teams))
             <form method="post">
             @csrf
             <table class="am-table am-table-striped am-table-hover">
