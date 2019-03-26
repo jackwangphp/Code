@@ -99,7 +99,7 @@ class ApplicationController extends Controller
             $application['team_id'] = $leader['teamid'];
             $application['team_info'] = '';
 
-            Application::create($application);
+            $exist = Application::create($application);
         }else{
             $exist->name = $application['name'];
             $exist->reason = $application['reason'];
@@ -109,7 +109,7 @@ class ApplicationController extends Controller
 
             $exist->save();
         }
-        return response('ok',200);
+        return redirect(route('applications.show',["application"=>$exist->id]));
 
     }
 
