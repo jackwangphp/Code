@@ -12,7 +12,6 @@ class Team extends Model
     public static function getTeam($teamid){
         $teams = Team::where([
             ['teamid', '=', $teamid],
-            ['is_active', '=', 1]
         ])->orderBy('inteam')->get();
         $teams = $teams->transform(function ($item) {
             $data = json_decode($item->info, true);
